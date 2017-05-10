@@ -1,0 +1,16 @@
+==================================
+[PROJECT FRAME]
+
+COPYRIGHT:
+© Simon Tran, 2017. All content in this repository is strictly for use
+by Simon Tran under the handle "SaiMon21". Any unauthorised use is not permitted.
+
+==================================
+
+[LOG]
+
+[10.5.2017 - MAY 10th]
+> Created 1st commit.
+> Added basic Unity project to repo.
+
+[
