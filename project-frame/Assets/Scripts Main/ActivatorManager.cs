@@ -17,6 +17,7 @@ public class ActivatorManager : MonoBehaviour {
 		
 	}
 
+	// Fully axtivate an object
 	public void activateObjects(){
 		foreach (GameObject objects in objToActivate) {
 			objects.SetActive (true);
@@ -25,12 +26,16 @@ public class ActivatorManager : MonoBehaviour {
 	}
 
 
+	// Fully 
 	public void deactivateObjects(){
 		foreach (GameObject objects in objToDeactivate) {
 			objects.SetActive (false);
 			Debug.Log ("Objects in array are now DE-ACTIVATED");
 		}
 	}
+
+
+
 
 
 
