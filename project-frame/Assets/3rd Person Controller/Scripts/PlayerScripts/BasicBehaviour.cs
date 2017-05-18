@@ -40,6 +40,11 @@ public class BasicBehaviour : MonoBehaviour
 
 	void Update()
 	{
+
+		// Hide Mouse Cursor
+		Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
+
 		// Store the input axes.
 		h = Input.GetAxis("Horizontal");
 		v = Input.GetAxis("Vertical");

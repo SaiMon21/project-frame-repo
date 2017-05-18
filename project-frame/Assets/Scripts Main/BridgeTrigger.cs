@@ -9,12 +9,13 @@ public class BridgeTrigger : MonoBehaviour {
 	public bool triggerOn;
 	public DOTweenAnimation bridgeTweenAnim;
 	public GameObject buttonPrompt;
+	public Animator bridgeCubeAnim;
 
 	// Use this for initialization
 	void Start () {
 		triggerOn = false;
 		buttonPrompt.gameObject.SetActive (false);
-		pauseTween ();
+		pauseTween();
 	}
 	
 	// Update is called once per frame
@@ -24,6 +25,7 @@ public class BridgeTrigger : MonoBehaviour {
 			triggerOn = true;
 			playTween ();
 			buttonPrompt.gameObject.SetActive (false);
+			bridgeCubeAnim.Play ("BridgeCubeMove");
 		}
 			
 		if (triggerOn) {
@@ -52,7 +54,6 @@ public class BridgeTrigger : MonoBehaviour {
 		
 	void OnTriggerExit(Collider other){
 		playerInRange = false;
-		triggerOn = false;
 		buttonPrompt.gameObject.SetActive (false);
 		Debug.Log ("Player NOT within range.");
 	}
@@ -60,11 +61,16 @@ public class BridgeTrigger : MonoBehaviour {
 
 	// Pause all tweens
 	public void pauseTween(){
-		DOTween.PauseAll ();
+		DOTween.Pause ("dtBridge");
 	}
 
 	public void playTween(){
-		DOTween.PlayAll();
+		DOTween.Play ("dtBridge");
+		Debug.Log ("PLAY bridge rotation tween.");
+	}
+
+	public void destroyBridge(){
+		Destroy (gameObject);
 	}
 
 }
