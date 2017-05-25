@@ -16,11 +16,13 @@ public class Area2Teleport : MonoBehaviour {
 	public GameObject teleportObject; // The Empty Object for teleporting the player
 	public GameObject mainCamera; // Main Camera, for re-activating it.
 	public GameObject cameraC; // Previous camera (Camera-C). Needs to be removed during teleportation.
+	public GameObject area1Manager;
 	public DOTweenAnimation blackScreenFade; // The object with its own DoTween Fade animations
 	public Image blackScreen;
 	public bool timeSwitch;
 	public float timeToTeleport;
 	public float fadeDuration;
+
 
 
 
@@ -30,6 +32,7 @@ public class Area2Teleport : MonoBehaviour {
 	void Start(){
 		//pauseTween();
 		timeSwitch = false;
+		RenderSettings.skybox.SetFloat("_Blend", 0f);
 	}
 
 	void OnTriggerEnter(Collider player){
@@ -87,8 +90,11 @@ public class Area2Teleport : MonoBehaviour {
 
 	public void optimizeLevel(){
 		playerObject.transform.position = teleportObject.transform.position;
+		RenderSettings.skybox.SetFloat("_Blend", 1f);
+		//RenderSettings.skybox.
 		mainCamera.SetActive (true);
 		cameraC.SetActive (false);
+		area1Manager.gameObject.SetActive (false);
 		Destroy (gameObject);
 	}
 

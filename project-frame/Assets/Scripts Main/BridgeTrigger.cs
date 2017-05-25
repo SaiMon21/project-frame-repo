@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class BridgeTrigger : MonoBehaviour {
@@ -8,32 +9,43 @@ public class BridgeTrigger : MonoBehaviour {
 	public bool playerInRange;
 	public bool triggerOn;
 	public DOTweenAnimation bridgeTweenAnim;
-	public GameObject buttonPrompt;
+	public Image buttonPrompt;
 	public Animator bridgeCubeAnim;
+	public GameObject mediaPlayer;
+	public Material area1Skybox;
+	public float fadeDuration;
 
 	// Use this for initialization
 	void Start () {
 		triggerOn = false;
-		buttonPrompt.gameObject.SetActive (false);
+		//buttonPrompt.gameObject.SetActive (false);
+		mediaPlayer.gameObject.SetActive (false);
+		area1Skybox.DOFade (1f, 0.1f);
 		pauseTween();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
 		if (playerInRange && Input.GetKeyDown(KeyCode.F)) {
 			triggerOn = true;
 			playTween ();
-			buttonPrompt.gameObject.SetActive (false);
+			mediaPlayer.gameObject.SetActive (true);
+			buttonPrompt.DOFade (0, 0.4f);
 			bridgeCubeAnim.Play ("BridgeCubeMove");
+			area1Skybox.DOFade (0f, fadeDuration);
+
+
 		}
 			
-		if (triggerOn) {
+		if (playerInRange && !triggerOn) {
 			//playTween ();
+			buttonPrompt.DOFade (1, 0.4f);
 		}
 
-		if(!playerInRange) {
+		if(!playerInRange ||triggerOn == true) {
 			//pauseTween ();
+
 		}
 			
 
@@ -44,17 +56,20 @@ public class BridgeTrigger : MonoBehaviour {
 		if (playerObject.tag == "BodyTrigger") {
 			playerInRange = true;
 
+
+
 			//triggerOn = true;
 			Debug.Log ("Player within Bridge trigger range.");
 			if (!triggerOn) {
-				buttonPrompt.gameObject.SetActive (true);
+				//buttonPrompt.gameObject.SetActive (true);
 			}
 		}
 	}
 		
 	void OnTriggerExit(Collider other){
 		playerInRange = false;
-		buttonPrompt.gameObject.SetActive (false);
+		//buttonPrompt.gameObject.SetActive (false);
+		buttonPrompt.DOFade (0, 0.4f);
 		Debug.Log ("Player NOT within range.");
 	}
 		
